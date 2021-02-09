@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { CssBaseline, makeStyles } from '@material-ui/core';
+import Header from './components/Header/Header';
+import React from 'react';
+import Routes from './configuration/Routes';
+import ThemeContextProvider from './configuration/ThemeContextProvider';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const useStyles = makeStyles(theme => ({
+        main: {
+            [theme.breakpoints.up('sm')]: {
+                margin: '5em',
+            },
+            [theme.breakpoints.down('xs')]: {
+                margin: '2em',
+            },
+        },
+    }));
+    const classes = useStyles()
+
+    return (
+        <Router>
+            <ThemeContextProvider>
+                <CssBaseline/>
+                <Header/>
+                <div className={ classes.main }>
+                    <Routes/>
+                </div>
+            </ThemeContextProvider>
+        </Router>
+    )
 }
 
-export default App;
+export default App
